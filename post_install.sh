@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mkdir /data
-chmod 755 /data
+chmod 666 /data
 
 # Enable the service
 sysrc -f /etc/rc.conf lidarr_enable="YES"
@@ -11,10 +11,6 @@ sysrc -f /etc/rc.conf sonarr_enable="YES"
 sysrc -f /etc/rc.conf prowlarr_enable="YES"
 sysrc -f /etc/rc.conf transmission_enable="YES"
 sysrc -f /etc/rc.conf transmission_download_dir="/data"
-
-# syncthing generate --config=/usr/local/etc/syncthing --no-default-folder --gui-user=$GUI_USER --gui-password=$GUI_PASS
-
-# chown -R syncthing:syncthing /Sync
 
 # Start the service
 service lidarr start 2>/dev/null
