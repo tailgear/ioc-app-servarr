@@ -1,7 +1,24 @@
 #!/bin/sh
 
-mkdir /data
-chmod 666 /data
+mkdir /media/data
+chmod 775 /media/data
+
+cd /usr/local/etc
+
+wget https://github.com/tailgear/homarr/archive/dev.zip
+unzip dev.zip
+mv homarr-dev homarr
+cd homarr
+
+npm install
+npm build
+npm prune --production
+npm i -g pm2
+
+pm2 start npm --name Homarr -- start --prefix /usr/local/etc/homarr/
+pm2 save
+mkdir /usr/local/etc/rc.d
+pm2 start rcd
 
 # Enable the service
 sysrc -f /etc/rc.conf lidarr_enable="YES"
