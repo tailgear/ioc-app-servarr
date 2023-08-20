@@ -1,6 +1,15 @@
 #!/bin/sh
 
+pw groupadd media -g 8675309
+pw groupmod media -m lidarr
+pw groupmod media -m radarr
+pw groupmod media -m readarr
+pw groupmod media -m sonarr
+pw groupmod media -m prowlarr
+pw groupmod media -m transmission
+
 mkdir /media/data
+chown root:media /media/data
 chmod 775 /media/data
 
 cd /usr/local
