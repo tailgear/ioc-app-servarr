@@ -3,19 +3,20 @@
 mkdir /media/data
 chmod 775 /media/data
 
-cd /usr/local/etc
+cd /usr/local
 
 wget https://github.com/tailgear/homarr/archive/dev.zip
 unzip dev.zip
+rm dev.zip
 mv homarr-dev homarr
 cd homarr
 
-npm install
-npm build
+npm i
+npm run build
 npm prune --production
 npm i -g pm2
 
-pm2 start npm --name Homarr -- start --prefix /usr/local/etc/homarr/
+pm2 start npm --name Homarr -- start --prefix /usr/local/homarr/
 pm2 save
 mkdir /usr/local/etc/rc.d
 pm2 start rcd
@@ -27,7 +28,7 @@ sysrc -f /etc/rc.conf readarr_enable="YES"
 sysrc -f /etc/rc.conf sonarr_enable="YES"
 sysrc -f /etc/rc.conf prowlarr_enable="YES"
 sysrc -f /etc/rc.conf transmission_enable="YES"
-sysrc -f /etc/rc.conf transmission_download_dir="/data"
+sysrc -f /etc/rc.conf transmission_download_dir="/media/data"
 
 # Start the service
 service lidarr start 2>/dev/null
