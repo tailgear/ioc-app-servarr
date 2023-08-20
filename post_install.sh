@@ -19,7 +19,7 @@ npm i -g pm2
 pm2 start npm --name Homarr -- start --prefix /usr/local/homarr/
 pm2 save
 mkdir /usr/local/etc/rc.d
-pm2 start rcd
+pm2 startup rcd
 
 # Enable the service
 sysrc -f /etc/rc.conf lidarr_enable="YES"
